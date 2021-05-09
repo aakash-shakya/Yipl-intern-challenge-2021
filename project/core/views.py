@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.db.models import Avg,Count,Min,Sum
 from .models import *
 
 import requests as req
@@ -25,3 +26,10 @@ def dataView(request):
         'overall_sale_by_country':Data.objects.all(),
     }
     return render(request, 'index.html',context)
+
+
+def overall_sale_by_country(request):
+    context={
+        'result':Data.objects.filter(sale__gt=0).values('country','product').annotate(Sum('sale')).order_by()
+    }
+    return render(request,'overallSale.html',context)
