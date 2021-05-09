@@ -51,3 +51,11 @@ def avg_sale_of_each_product_for_2_years(request):
         'result':html,
     }
     return render(request,'avgSale.html',context)
+
+def least_sale_year(request):
+    data=Data.objects.filter(sale__gt=0).values('product').annotate(min_sale=Min('sale'))
+    final_data = Data.objects.filter(sale__in=data.values('min_sale'))
+    context={
+        'result':final_data,
+    }
+    return render(request,'minSale.html',context)
