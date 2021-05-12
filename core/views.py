@@ -11,18 +11,21 @@ def dataView(request):
     url = "https://raw.githubusercontent.com/younginnovations/internship-challenges/master/programming/petroleum-report/data.json"
     res = req.get(url).json()
 
-    # try:
-    #     for i in res:
-    #         info = Data()
-    #         info.year=i['year']
-    #         info.sale=i['sale']
-    #         info.product=i['petroleum_product']
-    #         info.country=i['country']
-    #         info.save()
-
-    # except Exception as e:
-    #     print(e)
-
+    try:
+        datas = Data.objects.count()
+        if datas == 256:
+            pass
+        else:
+            for i in res:
+                info = Data()
+                info.year=i['year']
+                info.sale=i['sale']
+                info.product=i['petroleum_product']
+                info.country=i['country']
+                info.save()
+    except Exception as e:
+        print(e)
+        
     context ={
         'overall_sale_by_country':Data.objects.all(),
     }
@@ -31,7 +34,7 @@ def dataView(request):
 
 def overall_sale_by_country(request):
     context={
-        'result':Data.objects.filter(sale__gt=0).values('country','product').annotate(Sum('sale')).order_by()
+        'result':Data.objects.filter(sale__gt=0).values('country','product').annotate(Sum('sale')).order_by('country')
     }
     return render(request,'overallSale.html',context)
 
