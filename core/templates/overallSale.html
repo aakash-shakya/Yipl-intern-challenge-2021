@@ -1,39 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-    
-    <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+{% extends 'base.html' %}
 
-    <title>Home Page</title>
-    <style>
-        .tableFixHead          { overflow: auto; height: 450px; }
-        .tableFixHead thead th { position: sticky; top: 0; z-index: 1; }
+{% block title %}
+Overall Sale by country
+{% endblock %}
 
-        table  { border-collapse: collapse; width: 100%; }
-        th, td { padding: 8px 16px; }
-        th     { background:#eee; }
-
-        body {
-            background-image: -o-radial-gradient(black,white)
-        }
-        h3{
-            color:black;
-            text-align: center;
-        }
-        .links{
-            text-align: center;
-        }
-</style>
-
-</head>
-<body class="container">
-    <br>
+{% block content %} 
+<br>
     <h3><i><b>Overall Sale of each Petroleum product by country</b></i></h3>
     <br>
     <div class="tableFixHead bg-dark container">
@@ -55,17 +27,4 @@
     </table>
 </div>
 <br>
-<div class="links">
-<div>
-<a href="/overall-sale/">Overall Sale Of Each Petroleum Product by Country</a>
-</div>
-<div>
-<a href="/avg-sale/">Average Sale Of Each Petroleum Product for 2 years of Interval</a>
-</div>
-<div>
-<a href="/min-sale/">Year each Petroleum Product Had the Least Sale.</a>
-</div>
-<button class='btn btn-danger'><a href="/" style="color:white;">Go Back</a></button>
-</div>
-</body>
-</html>
+{% endblock %} 
