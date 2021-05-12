@@ -27,7 +27,7 @@ def dataView(request):
         print(e)
         
     context ={
-        'overall_sale_by_country':Data.objects.all(),
+        'overall_sale_by_country':Data.objects.all().order_by('year'),
     }
     return render(request, 'index.html',context)
 
