@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.http.response import Http404
+from django.shortcuts import get_list_or_404, get_object_or_404, render,HttpResponse
 from django.db.models import Avg,Count,Min,Sum
 from .models import *
 
@@ -7,25 +8,7 @@ import json
 import pandas as pd
 
 
-def dataView(request):
-    url = "https://raw.githubusercontent.com/younginnovations/internship-challenges/master/programming/petroleum-report/data.json"
-    res = req.get(url).json()
-
-    try:
-        datas = Data.objects.count()
-        if datas == 256:
-            pass
-        else:
-            for i in res:
-                info = Data()
-                info.year=i['year']
-                info.sale=i['sale']
-                info.product=i['petroleum_product']
-                info.country=i['country']
-                info.save()
-    except Exception as e:
-        print(e)
-        
+def dataView(request): 
     context ={
         'overall_sale_by_country':Data.objects.all().order_by('year'),
     }
@@ -62,3 +45,55 @@ def least_sale_year(request):
         'result':final_data,
     }
     return render(request,'minSale.html',context)
+
+
+
+class Find:
+    def post(self, request):
+        if request.method == "POST":
+            year = request.POST.get('year')
+            product = request.POST.get('product')
+            country = request.POST.get('country')
+            
+            data = get_list_or_404(Data,year=year,product__icontains=product,country__icontains=country)
+            
+            return data
+        else:
+            pass
+        
+
+
+
+def landing(request):
+    url = "https://raw.githubusercontent.com/younginnovations/internship-challenges/master/programming/petroleum-report/data.json"
+    res = req.get(url).json()
+
+    try:
+        datas = Data.objects.count()
+        if datas == 256:
+            pass
+        else:
+            for i in res:
+                info = Data()
+                info.year=i['year']
+                info.sale=i['sale']
+                info.product=i['petroleum_product']
+                info.country=i['country']
+                info.save()
+    except Exception as e:
+        pass
+    s = Find()
+    try:
+        result = s.post(request)
+        context={
+            'result':result,
+        }
+    except Http404 as e:
+        err=e
+        context={
+            'error':err,
+        }
+    return render(request,'landing.html',context)
+
+
+

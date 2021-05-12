@@ -4,6 +4,28 @@
 Overall Sale by country
 {% endblock %}
 
+{% block design %}
+
+    .tableFixHead          { overflow: auto; height: 450px; }
+    .tableFixHead thead th { position: sticky; top: 0; z-index: 1; }
+
+    table  { border-collapse: collapse; width: 100%; }
+    th, td { padding: 8px 16px; }
+    th     { background:#eee; }
+
+    body {
+        background-image: -o-radial-gradient(black,white)
+    }
+    h3{
+        color:black;
+        text-align: center;
+    }
+    .links{
+    text-align: center;
+}
+
+{% endblock %}
+
 {% block content %} 
 <br>
     <h3><i><b>Overall Sale of each Petroleum product by country</b></i></h3>
