@@ -7,4 +7,5 @@ class ProductAdmin(admin.ModelAdmin):
         'year','product','sale','country'
     ]
 
+    list_per_page = 500
     
