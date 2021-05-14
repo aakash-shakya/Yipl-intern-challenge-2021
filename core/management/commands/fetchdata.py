@@ -2,9 +2,9 @@ from django.core.management.base import BaseCommand, CommandError
 from core.models import Data
 import requests as req
 
-class Command(BaseCommand):
-    help = 'Update DB'
 
+class Command(BaseCommand):
+    help = "Update DB"
 
     def handle(self, *args, **options):
         if not Data.objects.exists():
@@ -14,14 +14,14 @@ class Command(BaseCommand):
             try:
                 for i in res:
                     info = Data()
-                    info.year=i['year']
-                    info.sale=i['sale']
-                    info.product=i['petroleum_product']
-                    info.country=i['country']
+                    info.year = i["year"]
+                    info.sale = i["sale"]
+                    info.product = i["petroleum_product"]
+                    info.country = i["country"]
                     info.save()
             except Exception as e:
-                pass
-            self.stdout.write(self.style.SUCCESS('Successfully fetched data'))
+                raise CommandError(e)
+            self.stdout.write(self.style.SUCCESS("Successfully fetched data"))
 
         else:
             pass
