@@ -1,45 +1,43 @@
-# Python: Getting Started
+# Young Innovations internship challenge 2021.
 
-A barebones Django app, which can easily be deployed to Heroku.
+## How to Run on LocalHost:
 
-This application supports the [Getting Started with Python on Heroku](https://devcenter.heroku.com/articles/getting-started-with-python) article - check it out.
-
-## Running Locally
-
-Make sure you have Python 3.9 [installed locally](https://docs.python-guide.org/starting/installation/). To push to Heroku, you'll need to install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli), as well as [Postgres](https://devcenter.heroku.com/articles/heroku-postgresql#local-setup).
-
-```sh
-$ git clone https://github.com/heroku/python-getting-started.git
-$ cd python-getting-started
-
-$ python3 -m venv getting-started
-$ pip install -r requirements.txt
-
-$ createdb python_getting_started
-
-$ python manage.py migrate
-$ python manage.py collectstatic
-
-$ heroku local
+First of all, clone the project from the [link](https://pip.pypa.io/en/stable/).
+```bash
+git clone https://aakas@bitbucket.org/aakas/yipl-intern-petroleum-report-web.git
+```
+1. Navigate to the folder
+```bash
+cd yipl-intern-petroleum-report-web
 ```
 
-Your app should now be running on [localhost:5000](http://localhost:5000/).
-
-## Deploying to Heroku
-
-```sh
-$ heroku create
-$ git push heroku main
-
-$ heroku run python manage.py migrate
-$ heroku open
+2. create a virtual environment with virtualenv
+```bash
+virtualenv  {envName}
 ```
-or
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+3. Install the required packages and library listed in requirements.txt
+```bash
+pip install -r requirements.txt
+```
 
-## Documentation
+4. Makemigrations, so that the script to create table with attributes in database can be created.
+```bash
+python manage.py makemigrations
+```
 
-For more information about using Python on Heroku, see these Dev Center articles:
+5. Migrate, so that the above made script by django actually creates table in db.
+```bash
+python manage.py migrate
+```
 
-- [Python on Heroku](https://devcenter.heroku.com/categories/python)
+6. fetchdata is the command. It fetches the data from api endpoint and saves the relations to the table.
+```bash
+python manage.py fetchdata
+```
+
+7. And finally run server, and enter [http://localhost:8000](http://localhost:8000) or [http://127.0.0.1:8000](http://127.0.0.1:8000) on the browser url. 
+#Note : the port can be changed as per client wish.
+```bash
+python manage.py runserver
+```
