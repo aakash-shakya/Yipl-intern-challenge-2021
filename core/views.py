@@ -67,7 +67,7 @@ class Find:
             country = request.POST.get("country")
 
             data = get_list_or_404(
-                Data, year=year, product__icontains=product, country__icontains=country
+                Data, year=year, product=product, country=country
             )
 
             return data
@@ -75,16 +75,26 @@ class Find:
             pass
 
 
+year = [2007,2008,2009,2010,2011,2012,2013,2014]
+country = ['USA','Saudi Arabia','Russia','Isereal']
+product = ['Kerosene','Diesel','Petrol','Furnace Oil','LPG in MT','Light Diesel Oil','Aviation Turbine Fuel','Mineral Turpentine Oil']
+
 def landing(request):
     s = Find()
     try:
         result = s.post(request)
         context = {
             "result": result,
+            "year":year,
+            "country":country,
+            "product":product,
         }
     except Http404 as e:
         err = e
         context = {
             "error": err,
+            "year":year,
+            "country":country,
+            "product":product,
         }
     return render(request, "landing.html", context)

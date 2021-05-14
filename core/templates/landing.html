@@ -41,28 +41,51 @@ Landing page
 </div>
 
 <br><br>
+<div style="background-color:lightcoral;padding:10px;">
 <h4><b>Find the Data on Petroleum Products :</b></h4><br>
 <div class = "d-flex justify-content-center">
 <form method="POST">
     {% csrf_token %}
     <div class="row">
         <div class="col">
-        <input type="number" class="form-control" name="year" value="" placeholder="Year" required="true" >
+        <!-- <input type="number" class="form-control" name="year" value="" placeholder="Year" required="true" >
+        <label for="year">Year</label> -->
+        <select id="inputState" class="form-control mx-sm-3 mb-2" name='year'>
+            <option selected value='0000'>Year</option>
+            {% for y in year %}
+                <option value="{{y}}">{{y}}</option>
+            {% endfor %}
+          </select>
         </div>
         <div class="col">
-        <input type="text" class="form-control"  name="country" value="" placeholder="Country" required="true">
+        <!-- <input type="text" class="form-control"  name="country" value="" placeholder="Country" required="true">
+        <label for="country">Country</label> -->
+        <select id="inputState" class="form-control mx-sm-3 mb-2" name='country'>
+            <option selected value="Country">Country</option>
+            {% for c in country %}
+                <option value="{{c}}">{{c}}</option>
+            {% endfor %}
+        </select>
         </div>
         <div class="col">
-        <input type="text" class="form-control" name="product" value="" placeholder="Product" required="true">
+        <!-- <input type="text" class="form-control" name="product" value="" placeholder="Product" required="true">
+        <label for="product">Product</label> -->
+        <select id="inputState" class="form-control mx-sm-3 mb-2" name='product'>
+            <option selected value="Product">Product</option>
+            {% for p in product %}
+                <option value="{{p}}">{{p}}</option>
+            {% endfor %}
+        </select>
         </div>
         <div class="col">
-        <button type="submit" class="form-control" value="submit">Submit</button>
+        <button type="submit" class="btn btn-primary mx-sm-3 mb-2" value="submit">Submit</button>
         </div>
     </div>
 </div>
 </form>
 </div>
-<br>
+</div>
+
 {% if result %}
 <table class="table table-striped table-light table-bordered">
     <thead class="thead-dark">
