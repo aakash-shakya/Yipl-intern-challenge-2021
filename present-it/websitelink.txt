@@ -1,0 +1,14 @@
+Landing page :
+                https://yipl.herokuapp.com/
+
+Database Data:
+                https://yipl.herokuapp.com/all-data/
+
+Overall Sale:
+                https://yipl.herokuapp.com/overall-sale/
+
+Average Sale:
+                https://yipl.herokuapp.com/avg-sale/
+
+least sale:
+                https://yipl.herokuapp.com/min-sale/
