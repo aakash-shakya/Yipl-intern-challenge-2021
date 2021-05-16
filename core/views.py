@@ -1,5 +1,5 @@
 from django.http.response import Http404
-from django.shortcuts import get_list_or_404, render
+from django.shortcuts import get_object_or_404, render
 from django.db.models import Min, Sum
 from .models import *
 
@@ -60,13 +60,13 @@ def least_sale_year(request):
 
 
 class Find:
-    def post(self, request):
-        if request.method == "POST":
-            year = request.POST.get("year")
-            product = request.POST.get("product")
-            country = request.POST.get("country")
+    def getData(self, request):
+        if request.method == "GET":
+            year = request.GET.get("year")
+            product = request.GET.get("product")
+            country = request.GET.get("country")
 
-            data = get_list_or_404(
+            data = get_object_or_404(
                 Data, year=year, product=product, country=country
             )
 
@@ -80,21 +80,31 @@ country = ['USA','Saudi Arabia','Russia','Isereal']
 product = ['Kerosene','Diesel','Petrol','Furnace Oil','LPG in MT','Light Diesel Oil','Aviation Turbine Fuel','Mineral Turpentine Oil']
 
 def landing(request):
-    s = Find()
-    try:
-        result = s.post(request)
-        context = {
-            "result": result,
-            "year":year,
-            "country":country,
-            "product":product,
-        }
-    except Http404 as e:
-        err = e
-        context = {
-            "error": err,
-            "year":year,
-            "country":country,
-            "product":product,
-        }
+    if request.method == "GET":
+        if 'getData' in request.GET:
+            try:
+                s = Find()
+                result = s.getData(request)
+                context = {
+                    "result": result,
+                    "year":year,
+                    "country":country,
+                    "product":product,
+                }
+            except Http404 as e:
+                err = e
+                context = {
+                    "error": err,
+                    "year":year,
+                    "country":country,
+                    "product":product,
+                }
+        else:
+            context={
+                "result":False,
+                "error":False,
+                "year":year,
+                "country":country,
+                "product":product,
+            }  
     return render(request, "landing.html", context)
